@@ -8,6 +8,7 @@ export const useHttp = () => {
   const request = useCallback(
     async (
       url: string,
+      params? : Object,
       method: string = "GET",
       body = null,
       headers = { "Content-Type": "application/json" }
@@ -15,7 +16,7 @@ export const useHttp = () => {
       setLoading(true);
 
       try {
-        const config : AxiosRequestConfig = { method, url, data:body, headers }
+        const config : AxiosRequestConfig = { method, params, url, data:body, headers }
         const response : AxiosResponse = await axios(config);
 
         const data = response.data;
