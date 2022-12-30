@@ -1,11 +1,16 @@
-import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import MainLayout from "../../layouts/mainLayout/MainLayout";
+import HomePage from "../../pages/homePage/HomePage";
 
 function App() {
   return (
-    <div className="App">
-    wedfwf
-    </div>
+    <Router>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
