@@ -6,8 +6,8 @@ import {
 } from "../models/api/IcharacterResponse.model";
 
 interface IUseMarvelService {
-  loading: boolean | null;
-  error: boolean | null;
+  loading: boolean;
+  error: string | null;
   getAllCharacters: (offset?: number) => Promise<Array<ICharacter>>;
   getCharacter: (id: number) => Promise<ICharacter>;
   clearError: () => void;

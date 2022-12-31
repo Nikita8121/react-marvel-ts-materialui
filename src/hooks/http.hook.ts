@@ -2,8 +2,8 @@ import { useState, useCallback } from "react";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const useHttp = () => {
-  const [loading, setLoading] = useState<boolean | null>(false);
-  const [error, setError] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const request = useCallback(
     async (

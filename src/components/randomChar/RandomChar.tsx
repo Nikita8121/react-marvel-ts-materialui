@@ -1,40 +1,79 @@
-import { useState, useEffect } from "react";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import useMarvelService from "../../hooks/marvelApi.hook";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Skeleton from "@mui/material/Skeleton";
+import useRandomChar from "./useRandomChar";
 import { ICharacter } from "../../models/api/IcharacterResponse.model";
 
+interface IViewProps {
+  character: ICharacter | null;
+  updateCharacter: () => void;
+}
+
+const View = ({ character, updateCharacter }: IViewProps) => {
+  return (
+    <Card
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        padding: "1rem",
+        flexGrow: 1,
+      }}
+    >
+      <Box sx={{ display: "flex", flexDirection: "column", pr: 2 }}>
+        <CardContent sx={{ flex: "1 0 auto" }}>
+          <Typography component="div" variant="h5">
+            {character?.name}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+          >
+            {character?.description}
+          </Typography>
+        </CardContent>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Button onClick={updateCharacter} variant="contained">
+            Update character
+          </Button>
+        </Box>
+      </Box>
+      <CardMedia
+        component="img"
+        sx={{ width: { md: 300, xs: 151 }, maxHeight: { md: 300, xs: 151 } }}
+        image={character?.thumbnail}
+        alt={character?.name}
+      />
+    </Card>
+  );
+};
+
+const Loader = () => {
+  return (
+    <Box>
+      <Skeleton sx={{ height: 100 }} />
+      <Skeleton sx={{ height: 100 }} />
+    </Box>
+  );
+};
+
 const RandomChar = () => {
-  const [character, setCharacter] = useState<ICharacter | null>(null);
-  const { getCharacter } = useMarvelService();
+  const { character, updateCharacter, loading } = useRandomChar();
 
-  const updateCharacter = (): void => {
-    const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
-    getCharacter(id).then((char: ICharacter) => {
-      setCharacter(char);
-    });
-  };
-
-  useEffect(() => {
-    console.log(character);
-  }, [character]);
-
-  useEffect(() => {
-    updateCharacter();
-  }, []);
+  const loader = loading ? <Loader /> : null;
+  const content = !loading ? (
+    <View character={character} updateCharacter={updateCharacter} />
+  ) : null;
 
   return (
-    <Grid sx={{ padding: "1rem 0" }} container>
-      <Grid item sm={5} xs={12}>
-        ergreg
-      </Grid>
-
-      <Divider sx={{ margin: "0 auto" }} orientation="vertical" flexItem />
-
-      <Grid sx={{ marginLeft: "auto" }} item sm={5} xs={12}>
-        ergeg
-      </Grid>
-    </Grid>
+    <Box sx={{ margin: "1rem 0" }}>
+      {content}
+      {loader}
+    </Box>
   );
 };
 

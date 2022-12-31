@@ -38,7 +38,7 @@ const AppHeader = () => {
   }; */
 
   return (
-    <AppBar sx={{ backgroundColor: "#f20000" }} position="static">
+    <AppBar sx={{ backgroundColor: "primary.main" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <MarvelIcon
