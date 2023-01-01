@@ -87,7 +87,7 @@ const AppHeader = () => {
             width="2500"
             height="1000"
             viewBox="0 0 500 200"
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+            sx={{ fontSize: 60, display: { xs: "flex", md: "none" }, mr: 1 }}
           />
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (

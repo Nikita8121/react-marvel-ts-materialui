@@ -30,6 +30,8 @@
     "react/function-component-definition": ["off"],
     "@typescript-eslint/naming-convention": ["off"],
     "no-underscore-dangle": ["off"],
-    "react/jsx-no-useless-fragment": ["off"]
+    "react/jsx-no-useless-fragment": ["off"],
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": "off"
   }
 }

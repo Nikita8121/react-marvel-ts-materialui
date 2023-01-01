@@ -44,7 +44,11 @@ const View = ({ character, updateCharacter }: IViewProps) => {
       </Box>
       <CardMedia
         component="img"
-        sx={{ width: { md: 300, xs: 151 }, maxHeight: { md: 300, xs: 151 } }}
+        sx={{
+          width: { md: 300, xs: 151 },
+          minHeight: 200,
+          maxHeight: { md: 300, xs: 151 },
+        }}
         image={character?.thumbnail}
         alt={character?.name}
       />
