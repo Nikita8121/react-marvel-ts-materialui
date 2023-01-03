@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import useRandomChar from "./useRandomChar";
-import { ICharacter } from "../../models/api/IcharacterResponse.model";
+import { ICharacter } from "../../shared/models/api/ICharacterResponse.interface";
 
 interface IViewProps {
   character: ICharacter | null;

@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import useMarvelService from "../../hooks/marvelApi.hook";
-import { ICharacter } from "../../models/api/IcharacterResponse.model";
+import useMarvelService from "../../shared/hooks/marvelApi.hook";
+import { ICharacter } from "../../shared/models/api/ICharacterResponse.interface";
 
 interface IUseCharList {
   characters: Array<ICharacter>;
   loadingNewChars: boolean;
   loading: boolean;
+  fetchChars: (offsetParam: number, initial?: boolean) => void;
+  offset: number;
 }
 
 const useCharList = (): IUseCharList => {
@@ -20,6 +22,7 @@ const useCharList = (): IUseCharList => {
       ...charactersList,
     ]);
     setOffset((offsetPrev) => offsetPrev + 9);
+    setLoadingNewChars(false);
   };
 
   const fetchChars = (offsetParam: number, initial: boolean = false) => {
@@ -31,7 +34,7 @@ const useCharList = (): IUseCharList => {
     fetchChars(offset, true);
   }, []);
 
-  return { characters, loadingNewChars, loading };
+  return { characters, loadingNewChars, loading, fetchChars, offset };
 };
 
 export default useCharList;

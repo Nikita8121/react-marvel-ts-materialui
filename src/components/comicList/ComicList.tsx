@@ -2,19 +2,20 @@ import Grid from "@mui/material/Grid";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import useCharList from "./useCharList";
-import CharCard from "../charCard/CharCard";
-import { ICharacter } from "../../shared/models/api/ICharacterResponse.interface";
+import useComicList from "./useComicList";
+import ComicCard from "../comicCard/ComicCard";
+
+import { IComic } from "../../shared/models/api/IComicResponse.interface";
 
 interface IViewProps {
-  characters: Array<ICharacter>;
+  comics: Array<IComic>;
 }
 
-const View = ({ characters }: IViewProps) => {
+const View = ({ comics }: IViewProps) => {
   return (
     <>
-      {characters.map((char) => {
-        return <CharCard key={char.id} character={char} />;
+      {comics.map((comic) => {
+        return <ComicCard key={comic.id} comic={comic} />;
       })}
     </>
   );
@@ -23,10 +24,10 @@ const View = ({ characters }: IViewProps) => {
 const Loader = () => {
   return (
     <>
-      {[null, null, null].map((val, i) => {
+      {[null, null, null, null].map((val, i) => {
         return (
           // eslint-disable-next-line react/no-array-index-key
-          <Grid key={i.toString()} item xs={4} sx={{ mb: 3 }}>
+          <Grid key={i.toString()} item xs={3} sx={{ mb: 3 }}>
             <Skeleton sx={{ minHeight: 80 }} />
             <Skeleton sx={{ minHeight: 80 }} animation="wave" />
             <Skeleton sx={{ minHeight: 80 }} animation={false} />
@@ -37,13 +38,13 @@ const Loader = () => {
   );
 };
 
-const CharList = () => {
-  const { characters, loadingNewChars, loading, fetchChars, offset } =
-    useCharList();
+const ComicList = () => {
+  const { comics, loadingNewComics, loading, fetchComics, offset } =
+    useComicList();
 
   const content =
-    !loading || loadingNewChars ? <View characters={characters} /> : null;
-  const loader = loading && !loadingNewChars ? <Loader /> : null;
+    !loading || loadingNewComics ? <View comics={comics} /> : null;
+  const loader = loading && !loadingNewComics ? <Loader /> : null;
 
   return (
     <>
@@ -53,15 +54,15 @@ const CharList = () => {
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
         <Button
-          disabled={loadingNewChars}
-          onClick={() => fetchChars(offset)}
+          disabled={loadingNewComics}
+          onClick={() => fetchComics(offset)}
           variant="contained"
         >
-          {loadingNewChars ? "loading..." : "Load more"}
+          {loadingNewComics ? "loading..." : "Load more"}
         </Button>
       </Box>
     </>
   );
 };
 
-export default CharList;
+export default ComicList;

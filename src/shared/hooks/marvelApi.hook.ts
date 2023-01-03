@@ -1,9 +1,9 @@
 import useHttp from "./http.hook";
-import { IComicResponse, IComic } from "../models/api/IcomicResponse.model";
+import { IComicResponse, IComic } from "../models/api/IComicResponse.interface";
 import {
   ICharacterResponse,
   ICharacter,
-} from "../models/api/IcharacterResponse.model";
+} from "../models/api/ICharacterResponse.interface";
 
 interface IUseMarvelService {
   loading: boolean;
@@ -103,7 +103,6 @@ const useMarvelService = (): IUseMarvelService => {
       offset,
       ...defaultParams,
     });
-    console.log(res);
     return _transformComics(res.data.results);
   };
 

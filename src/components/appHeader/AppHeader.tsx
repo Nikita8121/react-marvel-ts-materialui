@@ -9,9 +9,18 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+import { NavLink } from "react-router-dom";
 import MarvelIcon from "../../icons/MarvelIcon";
 
-const pages = ["Characters", "Comics"];
+interface IPage {
+  name: string;
+  path: string;
+}
+
+const pages: Array<IPage> = [
+  { name: "Characters", path: "/" },
+  { name: "Comics", path: "/comics" },
+];
 /* const settings = ["Profile", "Account", "Dashboard", "Logout"]; */
 
 const AppHeader = () => {
@@ -41,12 +50,14 @@ const AppHeader = () => {
     <AppBar sx={{ backgroundColor: "primary.main" }} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <MarvelIcon
-            sx={{ fontSize: 60, display: { xs: "none", md: "flex" }, mr: 1 }}
-            width="2500"
-            height="1000"
-            viewBox="0 0 500 200"
-          />
+          <NavLink to="/">
+            <MarvelIcon
+              sx={{ fontSize: 60, display: { xs: "none", md: "flex" }, mr: 1 }}
+              width="2500"
+              height="1000"
+              viewBox="0 0 500 200"
+            />
+          </NavLink>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -77,8 +88,8 @@ const AppHeader = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -92,11 +103,20 @@ const AppHeader = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
+                component={NavLink}
+                to={page.path}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  "&.active": {
+                    backgroundColor: "black !important",
+                  },
+                }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>

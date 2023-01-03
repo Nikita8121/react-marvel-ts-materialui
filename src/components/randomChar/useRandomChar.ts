@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import useMarvelService from "../../hooks/marvelApi.hook";
-import { ICharacter } from "../../models/api/IcharacterResponse.model";
+import useMarvelService from "../../shared/hooks/marvelApi.hook";
+import { ICharacter } from "../../shared/models/api/ICharacterResponse.interface";
 
 interface IUseRandomChar {
   character: ICharacter | null;

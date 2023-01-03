@@ -1,22 +1,24 @@
+import React from "react";
+import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
+import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
-import Grid from "@mui/material/Grid";
-import { ICharacter } from "../../shared/models/api/ICharacterResponse.interface";
+import IconButton from "@mui/material/IconButton";
+import { NavLink } from "react-router-dom";
+import { IComic } from "../../shared/models/api/IComicResponse.interface";
 
 interface IProps {
-  character: ICharacter;
+  comic: IComic;
 }
 
-const CharCard = ({ character }: IProps) => {
+const ComicCard = ({ comic }: IProps) => {
   return (
-    <Grid item xs={4} sx={{ mb: 3 }}>
+    <Grid item xs={3} sx={{ mb: 3 }}>
       <Card
         sx={{
           height: "100%",
@@ -27,15 +29,15 @@ const CharCard = ({ character }: IProps) => {
         <CardMedia
           component="img"
           height="194"
-          image={character.thumbnail}
+          image={comic.thumbnail}
           alt="Paella dish"
         />
         <CardContent>
           <Typography variant="h6" color="text.secondary">
-            {character.name}
+            {comic.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {character.description}
+            {comic.description}
           </Typography>
         </CardContent>
         <CardActions sx={{ marginTop: "auto" }} disableSpacing>
@@ -45,11 +47,7 @@ const CharCard = ({ character }: IProps) => {
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
-          <IconButton
-            target="_blank"
-            href={character.homepage}
-            aria-label="link"
-          >
+          <IconButton component={NavLink} to={`/comics/${comic.id}`}>
             <LinkIcon />
           </IconButton>
         </CardActions>
@@ -58,4 +56,4 @@ const CharCard = ({ character }: IProps) => {
   );
 };
 
-export default CharCard;
+export default ComicCard;
