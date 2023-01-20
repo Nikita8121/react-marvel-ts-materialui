@@ -10,7 +10,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import IconButton from "@mui/material/IconButton";
 import { NavLink } from "react-router-dom";
-import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.interfaces";
+import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.types";
 
 interface IProps {
   comic: IComic;

@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import useComicList from "./useComicList";
 import ComicCard from "../comicCard/ComicCard";
 
-import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.interfaces";
+import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.types";
 
 interface IViewProps {
   comics: IComic[] | undefined;

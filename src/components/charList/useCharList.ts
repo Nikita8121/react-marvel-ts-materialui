@@ -1,5 +1,5 @@
 import { useCharacters } from "../../shared/hooks/Character.api.hook";
-import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.interfaces";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.types";
 import transformApiResponse from "../../shared/utils/ApiUtils";
 
 interface IUseCharList {
