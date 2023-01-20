@@ -10,7 +10,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import IconButton from "@mui/material/IconButton";
 import { NavLink } from "react-router-dom";
-import { IComic } from "../../shared/models/api/IComicResponse.interface";
+import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.interfaces";
 
 interface IProps {
   comic: IComic;
@@ -47,7 +47,7 @@ const ComicCard = ({ comic }: IProps) => {
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
-          <IconButton component={NavLink} to={`/comics/${comic.id}`}>
+          <IconButton component={NavLink} to={`/comics/${comic._id}`}>
             <LinkIcon />
           </IconButton>
         </CardActions>

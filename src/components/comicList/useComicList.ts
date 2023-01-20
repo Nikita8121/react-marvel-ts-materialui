@@ -1,29 +1,16 @@
-import { useState, useEffect } from "react";
-import useMarvelService from "../../shared/hooks/marvelApi.hook";
-import { IComic } from "../../shared/models/api/IComicResponse.interface";
+import { useComics } from "../../shared/hooks/Comic.api.hook";
+import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.interfaces";
+import transformApiResponse from "../../shared/utils/ApiUtils";
 
 const useComicList = () => {
-  const [comics, setComics] = useState<Array<IComic>>([]);
-  const [offset, setOffset] = useState<number>(0);
-  const [loadingNewComics, setLoadingNewComics] = useState<boolean>(false);
-  const { getAllComics, loading } = useMarvelService();
+  const { data, fetchNextPage, isFetchingNextPage, isFetching } = useComics(0);
 
-  const onComicListLoaded = (comicsList: Array<IComic>) => {
-    setComics((comicsListPrev) => [...comicsListPrev, ...comicsList]);
-    setOffset((offsetPrev) => offsetPrev + 9);
-    setLoadingNewComics(false);
+  return {
+    comics: transformApiResponse(data?.pages) as IComic[] | undefined,
+    loadingNewComics: isFetchingNextPage,
+    loading: isFetching,
+    fetchComics: fetchNextPage,
   };
-
-  const fetchComics = (offsetParam: number, initial: boolean = false) => {
-    initial ? setLoadingNewComics(false) : setLoadingNewComics(true);
-    getAllComics(offsetParam).then(onComicListLoaded);
-  };
-
-  useEffect(() => {
-    fetchComics(offset, true);
-  }, []);
-
-  return { comics, loadingNewComics, loading, fetchComics, offset };
 };
 
 export default useComicList;

@@ -5,18 +5,19 @@ import Button from "@mui/material/Button";
 import useComicList from "./useComicList";
 import ComicCard from "../comicCard/ComicCard";
 
-import { IComic } from "../../shared/models/api/IComicResponse.interface";
+import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.interfaces";
 
 interface IViewProps {
-  comics: Array<IComic>;
+  comics: IComic[] | undefined;
 }
 
 const View = ({ comics }: IViewProps) => {
   return (
     <>
-      {comics.map((comic) => {
-        return <ComicCard key={comic.id} comic={comic} />;
-      })}
+      {comics &&
+        comics?.map((comic) => {
+          return <ComicCard key={comic?._id} comic={comic} />;
+        })}
     </>
   );
 };
@@ -39,8 +40,7 @@ const Loader = () => {
 };
 
 const ComicList = () => {
-  const { comics, loadingNewComics, loading, fetchComics, offset } =
-    useComicList();
+  const { comics, loadingNewComics, loading, fetchComics } = useComicList();
 
   const content =
     !loading || loadingNewComics ? <View comics={comics} /> : null;
@@ -55,7 +55,7 @@ const ComicList = () => {
       <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
         <Button
           disabled={loadingNewComics}
-          onClick={() => fetchComics(offset)}
+          onClick={() => fetchComics()}
           variant="contained"
         >
           {loadingNewComics ? "loading..." : "Load more"}

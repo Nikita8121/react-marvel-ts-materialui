@@ -1,40 +1,26 @@
-import { useState, useEffect } from "react";
-import useMarvelService from "../../shared/hooks/marvelApi.hook";
-import { ICharacter } from "../../shared/models/api/ICharacterResponse.interface";
+import { useCharacters } from "../../shared/hooks/Character.api.hook";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.interfaces";
+import transformApiResponse from "../../shared/utils/ApiUtils";
 
 interface IUseCharList {
-  characters: Array<ICharacter>;
+  characters: ICharacter[] | undefined;
   loadingNewChars: boolean;
   loading: boolean;
-  fetchChars: (offsetParam: number, initial?: boolean) => void;
-  offset: number;
+  fetchChars: () => void;
+  hasMoreCharacters: boolean | undefined;
 }
 
 const useCharList = (): IUseCharList => {
-  const [characters, setCharacters] = useState<Array<ICharacter>>([]);
-  const [offset, setOffset] = useState<number>(0);
-  const [loadingNewChars, setLoadingNewChars] = useState<boolean>(false);
-  const { getAllCharacters, loading } = useMarvelService();
+  const { data, fetchNextPage, isFetchingNextPage, isFetching, hasNextPage } =
+    useCharacters(0);
 
-  const onCharListLoaded = (charactersList: Array<ICharacter>) => {
-    setCharacters((charactersListPrev) => [
-      ...charactersListPrev,
-      ...charactersList,
-    ]);
-    setOffset((offsetPrev) => offsetPrev + 9);
-    setLoadingNewChars(false);
+  return {
+    characters: transformApiResponse(data?.pages) as ICharacter[] | undefined,
+    loadingNewChars: isFetchingNextPage,
+    loading: isFetching,
+    fetchChars: fetchNextPage,
+    hasMoreCharacters: hasNextPage,
   };
-
-  const fetchChars = (offsetParam: number, initial: boolean = false) => {
-    initial ? setLoadingNewChars(false) : setLoadingNewChars(true);
-    getAllCharacters(offsetParam).then(onCharListLoaded);
-  };
-
-  useEffect(() => {
-    fetchChars(offset, true);
-  }, []);
-
-  return { characters, loadingNewChars, loading, fetchChars, offset };
 };
 
 export default useCharList;

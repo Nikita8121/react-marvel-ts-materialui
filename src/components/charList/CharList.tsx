@@ -4,17 +4,17 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import useCharList from "./useCharList";
 import CharCard from "../charCard/CharCard";
-import { ICharacter } from "../../shared/models/api/ICharacterResponse.interface";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.interfaces";
 
 interface IViewProps {
-  characters: Array<ICharacter>;
+  characters: ICharacter[] | undefined;
 }
 
 const View = ({ characters }: IViewProps) => {
   return (
     <>
-      {characters.map((char) => {
-        return <CharCard key={char.id} character={char} />;
+      {characters?.map((char) => {
+        return <CharCard key={char._id} character={char} />;
       })}
     </>
   );
@@ -38,8 +38,13 @@ const Loader = () => {
 };
 
 const CharList = () => {
-  const { characters, loadingNewChars, loading, fetchChars, offset } =
-    useCharList();
+  const {
+    characters,
+    loadingNewChars,
+    loading,
+    fetchChars,
+    hasMoreCharacters,
+  } = useCharList();
 
   const content =
     !loading || loadingNewChars ? <View characters={characters} /> : null;
@@ -52,13 +57,15 @@ const CharList = () => {
         {loader}
       </Grid>
       <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-        <Button
-          disabled={loadingNewChars}
-          onClick={() => fetchChars(offset)}
-          variant="contained"
-        >
-          {loadingNewChars ? "loading..." : "Load more"}
-        </Button>
+        {hasMoreCharacters ? (
+          <Button
+            disabled={loadingNewChars}
+            onClick={() => fetchChars()}
+            variant="contained"
+          >
+            {loadingNewChars ? "loading..." : "Load more"}
+          </Button>
+        ) : null}
       </Box>
     </>
   );

@@ -4,7 +4,7 @@ import useSingleComic from "./useSingeComic";
 import "./singleComic.scss";
 
 interface IProps {
-  comicId: number;
+  comicId: string;
 }
 
 const SingleComic = ({ comicId }: IProps) => {
@@ -28,7 +28,7 @@ const SingleComic = ({ comicId }: IProps) => {
         <Typography variant="h4">{comic?.title}</Typography>
         <Typography variant="body1">{comic?.description}</Typography>
         <Typography sx={{ fontWeight: 600 }} mt={5} variant="body1">
-          price {comic?.price}
+          price {comic && comic.price > 0 ? `${comic.price}$` : "not available"}
         </Typography>
       </Grid>
     </Grid>

@@ -6,7 +6,7 @@ const SingleComicPage = () => {
   const { id } = useParams();
   return (
     <>
-      <SingleComic comicId={parseInt(id as string, 32)} />
+      <SingleComic comicId={id as string} />
     </>
   );
 };

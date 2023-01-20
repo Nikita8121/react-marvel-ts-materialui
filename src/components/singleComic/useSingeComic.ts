@@ -1,24 +1,13 @@
-import { useState, useEffect } from "react";
-import useMarvelService from "../../shared/hooks/marvelApi.hook";
-import { IComic } from "../../shared/models/api/IComicResponse.interface";
+import { useEffect } from "react";
+import { useComic } from "../../shared/hooks/Comic.api.hook";
 
-const useSingleComic = (comicId: number) => {
-  const [comic, setComic] = useState<IComic>();
-  const { getComic, loading } = useMarvelService();
-
-  const onComicLoaded = (fetchedComic: IComic) => {
-    setComic(fetchedComic);
-  };
-
-  const fetchComic = (id: number) => {
-    getComic(id).then(onComicLoaded);
-  };
-
+const useSingleComic = (comicId: string) => {
+  const { data, isLoading } = useComic(comicId);
   useEffect(() => {
-    fetchComic(comicId);
-  }, []);
+    console.log(data);
+  }, [data]);
 
-  return { comic, loading };
+  return { comic: data, loading: isLoading };
 };
 
 export default useSingleComic;

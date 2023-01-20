@@ -50,9 +50,7 @@ const useMarvelService = (): IUseMarvelService => {
     };
   };
 
-  const _transformComics = (
-    arrComics: Array<IComicResponse>,
-  ): Array<IComic> => {
+  const _transformComics = (arrComics: IComicResponse[]): IComic[] => {
     return arrComics.map((comic) => _transformComic(comic));
   };
 
@@ -97,7 +95,7 @@ const useMarvelService = (): IUseMarvelService => {
     return _transformCharacter(res.data.results[0]);
   };
 
-  const getAllComics = async (offset: number): Promise<Array<IComic>> => {
+  const getAllComics = async (offset: number = 0): Promise<Array<IComic>> => {
     const res = await request(`${_apiBase}comics`, {
       limit: 8,
       offset,
