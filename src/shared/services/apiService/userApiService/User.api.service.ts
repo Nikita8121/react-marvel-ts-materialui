@@ -1,18 +1,18 @@
 import axiosClient from "../axiosInstance";
 import {
-  IRegisterData,
-  ILoginData,
-  ILoginResponse,
-} from "./User.api.service.types";
+  ISignUpData,
+  ISignInData,
+  ISignInResponse,
+} from "./user.api.service.types";
 
-export const register = async (
-  registerData: IRegisterData,
-): Promise<IRegisterData> => {
-  const data = await axiosClient.post(`auth/register`, registerData);
+export const signUp = async (signUpData: ISignUpData): Promise<ISignUpData> => {
+  const data = await axiosClient.post(`auth/register`, signUpData);
   return data.data;
 };
 
-export const login = async (loginData: ILoginData): Promise<ILoginResponse> => {
-  const data = await axiosClient.post(`auth/login`, loginData);
+export const signIn = async (
+  signInData: ISignInData,
+): Promise<ISignInResponse> => {
+  const data = await axiosClient.post(`auth/login`, signInData);
   return data.data;
 };

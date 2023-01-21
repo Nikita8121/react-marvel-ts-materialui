@@ -1,11 +1,7 @@
-import { useEffect } from "react";
-import { useComic } from "../../shared/hooks/Comic.api.hook";
+import { useComicQuery } from "../../shared/hooks/Comic.api.hook";
 
 const useSingleComic = (comicId: string) => {
-  const { data, isLoading } = useComic(comicId);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const { data, isLoading } = useComicQuery(comicId);
 
   return { comic: data, loading: isLoading };
 };

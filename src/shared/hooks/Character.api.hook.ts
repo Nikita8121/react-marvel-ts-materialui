@@ -3,10 +3,10 @@ import {
   getAllCharacters,
   getCharacter,
   getRandomCharacter,
-} from "../services/apiService/characterApiService/Character.api.service";
-import {} from "../services/apiService/comicApiService/Comic.api.service";
+} from "../services/apiService/characterApiService/character.api.service";
+import {} from "../services/apiService/comicApiService/comic.api.service";
 
-const useCharacters = (offset: number) => {
+const useCharactersQuery = (offset: number) => {
   return useInfiniteQuery({
     queryKey: ["characters", offset],
     queryFn: async ({ pageParam = offset }) => {
@@ -22,16 +22,16 @@ const useCharacters = (offset: number) => {
   });
 };
 
-const useCharacter = (id: string) =>
+const useCharacterQuery = (id: string) =>
   useQuery({
     queryKey: ["characters", id],
     queryFn: async () => getCharacter(id),
   });
 
-const useRandomCharacter = () =>
+const useRandomCharacterQuery = () =>
   useQuery({
     queryKey: ["randomCharacter"],
     queryFn: async () => getRandomCharacter(),
   });
 
-export { useCharacters, useCharacter, useRandomCharacter };
+export { useCharactersQuery, useCharacterQuery, useRandomCharacterQuery };

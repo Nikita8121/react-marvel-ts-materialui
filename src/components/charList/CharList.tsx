@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import useCharList from "./useCharList";
 import CharCard from "../charCard/CharCard";
-import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.types";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
 
 interface IViewProps {
   characters: ICharacter[] | undefined;

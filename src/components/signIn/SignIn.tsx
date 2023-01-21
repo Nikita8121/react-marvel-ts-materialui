@@ -11,8 +11,8 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import useSignUp from "./useSignUp";
 import useValidation from "./useValidation";
+import useSignIn from "./useSignIn";
 
 function Copyright(props: any) {
   return (
@@ -32,8 +32,8 @@ function Copyright(props: any) {
 }
 
 export default function SignUp() {
-  const { signUp } = useSignUp();
-  const validation = useValidation(signUp);
+  const { signIn } = useSignIn();
+  const validation = useValidation(signIn);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

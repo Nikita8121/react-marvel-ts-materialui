@@ -1,5 +1,5 @@
 import axiosClient from "../axiosInstance";
-import { IComic, IGetAllComics } from "./Comic.api.service.types";
+import { IComic, IGetAllComics } from "./comic.api.service.types";
 
 export const getAllComics = async (offset: number): Promise<IGetAllComics> => {
   const data = await axiosClient.get(`comic?limit=9&offset=${offset}`);

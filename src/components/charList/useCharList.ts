@@ -1,5 +1,5 @@
-import { useCharacters } from "../../shared/hooks/Character.api.hook";
-import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.types";
+import { useCharactersQuery } from "../../shared/hooks/Character.api.hook";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
 import transformApiResponse from "../../shared/utils/ApiUtils";
 
 interface IUseCharList {
@@ -12,7 +12,7 @@ interface IUseCharList {
 
 const useCharList = (): IUseCharList => {
   const { data, fetchNextPage, isFetchingNextPage, isFetching, hasNextPage } =
-    useCharacters(0);
+    useCharactersQuery(0);
 
   return {
     characters: transformApiResponse(data?.pages) as ICharacter[] | undefined,

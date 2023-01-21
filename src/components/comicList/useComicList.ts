@@ -1,9 +1,10 @@
-import { useComics } from "../../shared/hooks/Comic.api.hook";
-import { IComic } from "../../shared/services/apiService/comicApiService/Comic.api.service.types";
+import { useComicsQuery } from "../../shared/hooks/Comic.api.hook";
+import { IComic } from "../../shared/services/apiService/comicApiService/comic.api.service.types";
 import transformApiResponse from "../../shared/utils/ApiUtils";
 
 const useComicList = () => {
-  const { data, fetchNextPage, isFetchingNextPage, isFetching } = useComics(0);
+  const { data, fetchNextPage, isFetchingNextPage, isFetching } =
+    useComicsQuery(0);
 
   return {
     comics: transformApiResponse(data?.pages) as IComic[] | undefined,

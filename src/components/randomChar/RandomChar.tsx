@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Skeleton from "@mui/material/Skeleton";
 import useRandomChar from "./useRandomChar";
-import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.types";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
 
 interface IViewProps {
   character: ICharacter | undefined;

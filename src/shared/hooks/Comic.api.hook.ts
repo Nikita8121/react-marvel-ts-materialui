@@ -3,9 +3,9 @@ import { useInfiniteQuery, useQuery } from "react-query";
 import {
   getAllComics,
   getComic,
-} from "../services/apiService/comicApiService/Comic.api.service";
+} from "../services/apiService/comicApiService/comic.api.service";
 
-const useComics = (offset: number) => {
+const useComicsQuery = (offset: number) => {
   return useInfiniteQuery({
     queryKey: ["comics", offset],
     queryFn: async ({ pageParam = offset }) => {
@@ -21,10 +21,10 @@ const useComics = (offset: number) => {
   });
 };
 
-const useComic = (id: string) =>
+const useComicQuery = (id: string) =>
   useQuery({
     queryKey: ["comic", id],
     queryFn: async () => getComic(id),
   });
 
-export { useComics, useComic };
+export { useComicsQuery, useComicQuery };

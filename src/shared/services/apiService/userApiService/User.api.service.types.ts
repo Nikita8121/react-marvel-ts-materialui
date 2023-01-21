@@ -1,13 +1,17 @@
-export interface IRegisterData {
+export interface ISignUpData {
   email: string;
   password: string;
 }
 
-export interface ILoginData {
+export interface ISignInData {
   email: string;
   password: string;
 }
 
-export interface ILoginResponse {
+export interface ISignUpResponse {
+  email: string;
+}
+
+export interface ISignInResponse {
   access_token: string;
 }

@@ -1,5 +1,5 @@
 import axiosClient from "../axiosInstance";
-import { ICharacter, IGetAllCharacters } from "./Character.api.service.types";
+import { ICharacter, IGetAllCharacters } from "./character.api.service.types";
 
 export const getAllCharacters = async (
   offset: number,

@@ -8,7 +8,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import Grid from "@mui/material/Grid";
-import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.types";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
 
 interface IProps {
   character: ICharacter;

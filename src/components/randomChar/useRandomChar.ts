@@ -1,5 +1,5 @@
-import { useRandomCharacter } from "../../shared/hooks/Character.api.hook";
-import { ICharacter } from "../../shared/services/apiService/characterApiService/Character.api.service.types";
+import { useRandomCharacterQuery } from "../../shared/hooks/Character.api.hook";
+import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
 
 interface IUseRandomChar {
   character: ICharacter | undefined;
@@ -8,7 +8,7 @@ interface IUseRandomChar {
 }
 
 const useRandomChar = (): IUseRandomChar => {
-  const { data, isLoading, refetch } = useRandomCharacter();
+  const { data, isLoading, refetch } = useRandomCharacterQuery();
 
   return { character: data, updateCharacter: refetch, loading: isLoading };
 };
