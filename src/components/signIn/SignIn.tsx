@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -31,7 +29,7 @@ function Copyright(props: any) {
   );
 }
 
-export default function SignUp() {
+export default function SignIn() {
   const { signIn } = useSignIn();
   const validation = useValidation(signIn);
   return (
@@ -49,7 +47,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign in
         </Typography>
         <Box
           component="form"
@@ -89,10 +87,6 @@ export default function SignUp() {
               validation.touched.password && validation.errors.password
             }
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -104,7 +98,7 @@ export default function SignUp() {
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Have an account?
+                Doesn't have an account?
               </Link>
             </Grid>
           </Grid>

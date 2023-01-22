@@ -1,29 +1,47 @@
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { useState, MouseEvent } from "react";
+import { MouseEvent } from "react";
+import Box from "@mui/material/Box";
+import SignUp from "../../components/signUp/SignUp";
+import SignIn from "../../components/signIn/SignIn";
 
-const LoginPage = () => {
-  const [alignment, setAlignment] = useState("web");
+import useLoginPage from "./useLoginPage";
+import type { toggleLogin } from "./useLoginPage";
 
-  const handleChange = (
+interface ILoginToggler {
+  handleTogglerChange: (
     event: MouseEvent<HTMLElement>,
-    newAlignment: string,
-  ) => {
-    setAlignment(newAlignment);
-  };
+    newValue: toggleLogin,
+  ) => void;
+  loginToggler: toggleLogin;
+}
+
+const LoginToggler = ({ handleTogglerChange, loginToggler }: ILoginToggler) => {
   return (
-    <>
+    <Box sx={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
       <ToggleButtonGroup
         color="primary"
-        value={alignment}
+        value={loginToggler}
         exclusive
-        onChange={handleChange}
+        onChange={handleTogglerChange}
         aria-label="Platform"
       >
-        <ToggleButton value="web">Web</ToggleButton>
-        <ToggleButton value="android">Android</ToggleButton>
-        <ToggleButton value="ios">iOS</ToggleButton>
+        <ToggleButton value="register">Register</ToggleButton>
+        <ToggleButton value="login">login</ToggleButton>
       </ToggleButtonGroup>
+    </Box>
+  );
+};
+
+const LoginPage = () => {
+  const { handleTogglerChange, loginToggler } = useLoginPage();
+  return (
+    <>
+      <LoginToggler
+        handleTogglerChange={handleTogglerChange}
+        loginToggler={loginToggler}
+      />
+      {loginToggler === "register" ? <SignUp /> : <SignIn />}
     </>
   );
 };

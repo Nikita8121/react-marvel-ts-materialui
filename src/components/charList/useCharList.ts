@@ -1,4 +1,4 @@
-import { useCharactersQuery } from "../../shared/hooks/Character.api.hook";
+import { useCharactersQuery } from "../../shared/hooks/character.api.hook";
 import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
 import transformApiResponse from "../../shared/utils/ApiUtils";
 

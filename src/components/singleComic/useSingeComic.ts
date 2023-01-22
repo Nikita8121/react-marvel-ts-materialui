@@ -1,4 +1,4 @@
-import { useComicQuery } from "../../shared/hooks/Comic.api.hook";
+import { useComicQuery } from "../../shared/hooks/comic.api.hook";
 
 const useSingleComic = (comicId: string) => {
   const { data, isLoading } = useComicQuery(comicId);

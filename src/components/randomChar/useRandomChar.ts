@@ -1,4 +1,4 @@
-import { useRandomCharacterQuery } from "../../shared/hooks/Character.api.hook";
+import { useRandomCharacterQuery } from "../../shared/hooks/character.api.hook";
 import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
 
 interface IUseRandomChar {

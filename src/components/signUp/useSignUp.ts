@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSignUpQuery } from "../../shared/hooks/User.api.hook";
+import { useSignUpQuery } from "../../shared/hooks/user.api.hook";
 
 const useSignUp = () => {
   const { mutate, isSuccess } = useSignUpQuery();

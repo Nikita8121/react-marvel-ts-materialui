@@ -1,4 +1,4 @@
-import { useComicsQuery } from "../../shared/hooks/Comic.api.hook";
+import { useComicsQuery } from "../../shared/hooks/comic.api.hook";
 import { IComic } from "../../shared/services/apiService/comicApiService/comic.api.service.types";
 import transformApiResponse from "../../shared/utils/ApiUtils";
 

@@ -20,7 +20,7 @@ interface IPage {
 const pages: Array<IPage> = [
   { name: "Characters", path: "/" },
   { name: "Comics", path: "/comics" },
-  { name: "SignUp", path: "/sign-up" },
+  { name: "Login", path: "/login" },
 ];
 /* const settings = ["Profile", "Account", "Dashboard", "Logout"]; */
 
