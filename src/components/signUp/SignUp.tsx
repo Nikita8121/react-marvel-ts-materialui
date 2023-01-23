@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { MouseEvent } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -29,7 +30,11 @@ function Copyright(props: any) {
   );
 }
 
-export default function SignUp() {
+interface ISignUp {
+  setLoginQuery: (value: boolean) => void;
+}
+
+const SignUp = ({ setLoginQuery }: ISignUp) => {
   const { signUp } = useSignUp();
   const validation = useValidation(signUp);
   return (
@@ -97,7 +102,14 @@ export default function SignUp() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link
+                onClick={(e: MouseEvent<HTMLElement>) => {
+                  e.preventDefault();
+                  setLoginQuery(true);
+                }}
+                href="#"
+                variant="body2"
+              >
                 Have an account?
               </Link>
             </Grid>
@@ -107,4 +119,6 @@ export default function SignUp() {
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
-}
+};
+
+export default SignUp;

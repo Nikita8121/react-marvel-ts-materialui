@@ -1,32 +1,33 @@
-import { useState, MouseEvent, useMemo, useEffect } from "react";
+import { useState, MouseEvent, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export type toggleLogin = "register" | "login";
 
 const useLoginPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loginToggler, setLoginToggler] = useState<toggleLogin>("login");
+
+  const setLoginQuery = (value: boolean) => {
+    setSearchParams({ login: value.toString() });
+  };
 
   useEffect(() => {
-    if (!searchParams.has("login")) {
-      setSearchParams({ login: "true" });
+    const queryValue = searchParams.get("login");
+    if (!queryValue) {
+      setLoginQuery(true);
+    } else {
+      setLoginToggler(queryValue === "true" ? "login" : "register");
     }
   }, [searchParams]);
-
-  const loginTogglerValue = useMemo((): toggleLogin => {
-    return searchParams.get("login") === "true" ? "login" : "register";
-  }, [searchParams]);
-
-  const [loginToggler, setLoginToggler] =
-    useState<toggleLogin>(loginTogglerValue);
 
   const handleTogglerChange = (
     event: MouseEvent<HTMLElement>,
     newValue: toggleLogin,
   ) => {
-    setLoginToggler(newValue);
+    setLoginQuery(newValue === "login");
   };
 
-  return { handleTogglerChange, loginToggler };
+  return { handleTogglerChange, loginToggler, setLoginQuery };
 };
 
 export default useLoginPage;

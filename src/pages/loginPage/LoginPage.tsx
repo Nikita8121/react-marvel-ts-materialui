@@ -34,14 +34,18 @@ const LoginToggler = ({ handleTogglerChange, loginToggler }: ILoginToggler) => {
 };
 
 const LoginPage = () => {
-  const { handleTogglerChange, loginToggler } = useLoginPage();
+  const { handleTogglerChange, loginToggler, setLoginQuery } = useLoginPage();
   return (
     <>
       <LoginToggler
         handleTogglerChange={handleTogglerChange}
         loginToggler={loginToggler}
       />
-      {loginToggler === "register" ? <SignUp /> : <SignIn />}
+      {loginToggler === "register" ? (
+        <SignUp setLoginQuery={setLoginQuery} />
+      ) : (
+        <SignIn setLoginQuery={setLoginQuery} />
+      )}
     </>
   );
 };

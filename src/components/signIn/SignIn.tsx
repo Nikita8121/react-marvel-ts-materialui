@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { MouseEvent } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,6 +12,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import useValidation from "./useValidation";
 import useSignIn from "./useSignIn";
+
+interface ISignIn {
+  setLoginQuery: (value: boolean) => void;
+}
 
 function Copyright(props: any) {
   return (
@@ -29,7 +34,7 @@ function Copyright(props: any) {
   );
 }
 
-export default function SignIn() {
+const SignIn = ({ setLoginQuery }: ISignIn) => {
   const { signIn } = useSignIn();
   const validation = useValidation(signIn);
   return (
@@ -97,7 +102,14 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link
+                onClick={(e: MouseEvent<HTMLElement>) => {
+                  e.preventDefault();
+                  setLoginQuery(false);
+                }}
+                href="#"
+                variant="body2"
+              >
                 Doesn't have an account?
               </Link>
             </Grid>
@@ -107,4 +119,6 @@ export default function SignIn() {
       <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
-}
+};
+
+export default SignIn;
