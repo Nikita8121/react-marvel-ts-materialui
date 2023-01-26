@@ -15,3 +15,7 @@ export interface ISignUpResponse {
 export interface ISignInResponse {
   access_token: string;
 }
+
+export interface IUser {
+  email: string;
+}

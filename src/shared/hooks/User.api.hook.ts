@@ -1,7 +1,8 @@
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import {
   signUp,
   signIn,
+  getUser,
 } from "../services/apiService/userApiService/user.api.service";
 import { ISignUpData } from "../services/apiService/userApiService/user.api.service.types";
 
@@ -15,4 +16,11 @@ const useLoginQuery = () =>
     mutationFn: async ({ data }: { data: ISignUpData }) => signIn(data),
   });
 
-export { useSignUpQuery, useLoginQuery };
+const useGetUserQuery = () =>
+  useQuery({
+    queryKey: ["user"],
+    queryFn: async () => getUser(),
+    retry: 0,
+  });
+
+export { useSignUpQuery, useLoginQuery, useGetUserQuery };

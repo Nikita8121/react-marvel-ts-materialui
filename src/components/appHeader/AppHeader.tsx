@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,26 +11,29 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { NavLink } from "react-router-dom";
 import MarvelIcon from "../../icons/MarvelIcon";
+import useUserStore from "../../store/userStore";
 
 interface IPage {
   name: string;
   path: string;
+  protected?: boolean;
+  isAvailableOnAuth?: boolean;
 }
 
-const pages: Array<IPage> = [
+const pages: IPage[] = [
   { name: "Characters", path: "/" },
   { name: "Comics", path: "/comics" },
-  { name: "Login", path: "/login" },
+  { name: "Login", path: "/login", isAvailableOnAuth: false },
+  { name: "Profile", path: "/profile", protected: true },
 ];
 /* const settings = ["Profile", "Account", "Dashboard", "Logout"]; */
 
 const AppHeader = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null,
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   /* const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null,
   ); */
+  const IsloggedIn = useUserStore((state) => state.isLoggedIn);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -46,6 +49,22 @@ const AppHeader = () => {
   /* const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   }; */
+
+  const IsShowMenuItem = (page: IPage): boolean => {
+    if (page.isAvailableOnAuth === undefined && page.protected === undefined)
+      return true;
+    if (page.protected && !IsloggedIn) {
+      return false;
+    }
+    if (page.isAvailableOnAuth === false && IsloggedIn) {
+      return false;
+    }
+    return true;
+  };
+
+  const filteredPages = useMemo(() => {
+    return pages.filter((page) => IsShowMenuItem(page));
+  }, [IsloggedIn]);
 
   return (
     <AppBar sx={{ backgroundColor: "primary.main" }} position="static">
@@ -88,7 +107,7 @@ const AppHeader = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
+              {filteredPages.map((page) => (
                 <MenuItem key={page.name} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
@@ -102,7 +121,7 @@ const AppHeader = () => {
             sx={{ fontSize: 60, display: { xs: "flex", md: "none" }, mr: 1 }}
           />
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {filteredPages.map((page) => (
               <Button
                 key={page.name}
                 component={NavLink}

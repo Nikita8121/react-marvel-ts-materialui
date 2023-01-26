@@ -3,16 +3,19 @@ import {
   ISignUpData,
   ISignInData,
   ISignInResponse,
+  IUser,
 } from "./user.api.service.types";
 
 export const signUp = async (signUpData: ISignUpData): Promise<ISignUpData> => {
-  const data = await axiosClient.post(`auth/register`, signUpData);
-  return data.data;
+  return axiosClient.post(`auth/register`, signUpData).then((res) => res.data);
 };
 
 export const signIn = async (
   signInData: ISignInData,
 ): Promise<ISignInResponse> => {
-  const data = await axiosClient.post(`auth/login`, signInData);
-  return data.data;
+  return axiosClient.post(`auth/login`, signInData).then((res) => res.data);
+};
+
+export const getUser = async (): Promise<IUser> => {
+  return axiosClient.get("auth/me").then((res) => res.data);
 };

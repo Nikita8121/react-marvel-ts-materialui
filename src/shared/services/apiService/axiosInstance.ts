@@ -1,4 +1,5 @@
 import axios, { AxiosHeaders } from "axios";
+import { getAuthToken } from "../../utils/authTokenUtils";
 
 const axiosClient = axios.create();
 
@@ -15,7 +16,7 @@ axiosClient.defaults.headers.common.Accept = "application/json";
 
 axiosClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("access-token");
+    const token = getAuthToken();
     if (token) {
       // Configure this as per your backend requirements
       // eslint-disable-next-line no-param-reassign

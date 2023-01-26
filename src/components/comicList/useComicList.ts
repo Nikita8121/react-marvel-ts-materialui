@@ -1,6 +1,6 @@
 import { useComicsQuery } from "../../shared/hooks/comic.api.hook";
 import { IComic } from "../../shared/services/apiService/comicApiService/comic.api.service.types";
-import transformApiResponse from "../../shared/utils/ApiUtils";
+import transformApiResponse from "../../shared/utils/apiUtils";
 
 const useComicList = () => {
   const { data, fetchNextPage, isFetchingNextPage, isFetching } =

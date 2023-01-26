@@ -1,6 +1,6 @@
 import { useCharactersQuery } from "../../shared/hooks/character.api.hook";
 import { ICharacter } from "../../shared/services/apiService/characterApiService/character.api.service.types";
-import transformApiResponse from "../../shared/utils/ApiUtils";
+import transformApiResponse from "../../shared/utils/apiUtils";
 
 interface IUseCharList {
   characters: ICharacter[] | undefined;
