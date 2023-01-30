@@ -1,9 +1,9 @@
-import { useGetUserQuery } from "../../shared/hooks/user.api.hook";
+import useGetUser from "../../shared/hooks/user.hooks/getUser.hook";
 
 const useProfile = () => {
-  const { data } = useGetUserQuery();
+  const { user } = useGetUser();
 
-  return { user: data };
+  return { user };
 };
 
 export default useProfile;

@@ -4,7 +4,7 @@ import { IComic } from "../shared/services/apiService/comicApiService/comic.api.
 interface IItem {
   comicId: string;
   quantity: number;
-  price: number;
+  totalPrice: number;
   item: IComic;
 }
 
@@ -28,8 +28,17 @@ const useCartStore = create<ICartStore>((set) => ({
         (item) => item.comicId === newItem._id,
       );
       if (itemIndex < 0) {
-        state.cart.items.push();
-        return { ...state };
+        const item = {
+          comicId: newItem._id,
+          quantity: 1,
+          totalPrice: newItem.price,
+          item: newItem,
+        };
+        state.cart.items.push(item);
+      } else {
+        const item: IItem = state.cart.items[itemIndex];
+        item.quantity += 1;
+        item.totalPrice += newItem.price;
       }
       return { ...state };
     });

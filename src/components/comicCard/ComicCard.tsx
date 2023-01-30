@@ -1,4 +1,3 @@
-import React from "react";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -6,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import IconButton from "@mui/material/IconButton";
@@ -14,9 +14,10 @@ import { IComic } from "../../shared/services/apiService/comicApiService/comic.a
 
 interface IProps {
   comic: IComic;
+  addToCart: (item: IComic) => void;
 }
 
-const ComicCard = ({ comic }: IProps) => {
+const ComicCard = ({ comic, addToCart }: IProps) => {
   return (
     <Grid item xs={3} sx={{ mb: 3 }}>
       <Card
@@ -49,6 +50,9 @@ const ComicCard = ({ comic }: IProps) => {
           </IconButton>
           <IconButton component={NavLink} to={`/comics/${comic._id}`}>
             <LinkIcon />
+          </IconButton>
+          <IconButton disabled={!comic.price} onClick={() => addToCart(comic)}>
+            <AddShoppingCartIcon />
           </IconButton>
         </CardActions>
       </Card>

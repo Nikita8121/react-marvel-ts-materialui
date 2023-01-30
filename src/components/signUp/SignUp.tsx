@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import useSignUp from "./useSignUp";
+import useSignUpComponent from "./useSignUpComponent";
 import useValidation from "./useValidation";
 
 function Copyright(props: any) {
@@ -35,7 +35,7 @@ interface ISignUp {
 }
 
 const SignUp = ({ setLoginQuery }: ISignUp) => {
-  const { signUp } = useSignUp();
+  const { signUp } = useSignUpComponent();
   const validation = useValidation(signUp);
   return (
     <Container component="main" maxWidth="xs">

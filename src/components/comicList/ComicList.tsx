@@ -9,14 +9,17 @@ import { IComic } from "../../shared/services/apiService/comicApiService/comic.a
 
 interface IViewProps {
   comics: IComic[] | undefined;
+  addToCart: (item: IComic) => void;
 }
 
-const View = ({ comics }: IViewProps) => {
+const View = ({ comics, addToCart }: IViewProps) => {
   return (
     <>
       {comics &&
         comics?.map((comic) => {
-          return <ComicCard key={comic?._id} comic={comic} />;
+          return (
+            <ComicCard addToCart={addToCart} key={comic?._id} comic={comic} />
+          );
         })}
     </>
   );
@@ -40,10 +43,13 @@ const Loader = () => {
 };
 
 const ComicList = () => {
-  const { comics, loadingNewComics, loading, fetchComics } = useComicList();
+  const { comics, loadingNewComics, loading, fetchComics, addToCart } =
+    useComicList();
 
   const content =
-    !loading || loadingNewComics ? <View comics={comics} /> : null;
+    !loading || loadingNewComics ? (
+      <View addToCart={addToCart} comics={comics} />
+    ) : null;
   const loader = loading && !loadingNewComics ? <Loader /> : null;
 
   return (

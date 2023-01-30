@@ -4,7 +4,9 @@ import {
   signIn,
   getUser,
 } from "../services/apiService/userApiService/user.api.service";
+import useUserStore from "../../store/userStore";
 import { ISignUpData } from "../services/apiService/userApiService/user.api.service.types";
+import { clearAuthToken, getAuthToken } from "../utils/authTokenUtils";
 
 const useSignUpQuery = () =>
   useMutation({
@@ -16,11 +18,23 @@ const useLoginQuery = () =>
     mutationFn: async ({ data }: { data: ISignUpData }) => signIn(data),
   });
 
-const useGetUserQuery = () =>
-  useQuery({
+const useGetUserQuery = () => {
+  const setIsLoggedIn = useUserStore((state) => state.setIsloggedIn);
+  return useQuery({
     queryKey: ["user"],
-    queryFn: async () => getUser(),
-    retry: 0,
+    queryFn: async () => {
+      if (getAuthToken()) {
+        return getUser();
+      }
+      return null;
+    },
+    onSuccess: () => {
+      setIsLoggedIn(true);
+    },
+    onError: () => {
+      clearAuthToken();
+    },
   });
+};
 
 export { useSignUpQuery, useLoginQuery, useGetUserQuery };

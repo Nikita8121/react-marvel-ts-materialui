@@ -11,7 +11,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import useValidation from "./useValidation";
-import useSignIn from "./useSignIn";
+import useSignInComponent from "./useSignInComponent";
 
 interface ISignIn {
   setLoginQuery: (value: boolean) => void;
@@ -35,7 +35,7 @@ function Copyright(props: any) {
 }
 
 const SignIn = ({ setLoginQuery }: ISignIn) => {
-  const { signIn } = useSignIn();
+  const { signIn } = useSignInComponent();
   const validation = useValidation(signIn);
   return (
     <Container component="main" maxWidth="xs">

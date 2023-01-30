@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import Grid from "@mui/material/Grid";
@@ -39,9 +38,6 @@ const CharCard = ({ character }: IProps) => {
           </Typography>
         </CardContent>
         <CardActions sx={{ marginTop: "auto" }} disableSpacing>
-          <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
-          </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
           </IconButton>
