@@ -1,16 +1,21 @@
 import Fab from "@mui/material/Fab";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
+import useCartLinkComponent from "./useCartLinkComponent";
 
 const CartLink = () => {
+  const { itemsAmount, toggleCart } = useCartLinkComponent();
   return (
-    <Fab
+    <Badge
       sx={{ position: "fixed", bottom: "1rem", right: "1rem" }}
-      size="medium"
-      color="secondary"
-      aria-label="cart"
+      badgeContent={itemsAmount.toString()}
+      color="primary"
+      onClick={toggleCart}
     >
-      <ShoppingCartIcon />
-    </Fab>
+      <Fab size="medium" color="secondary" aria-label="cart">
+        <ShoppingCartIcon />
+      </Fab>
+    </Badge>
   );
 };
 

@@ -1,6 +1,10 @@
 import { IComic } from "../comicApiService/comic.api.service.types";
 
-interface ICartItem {
+export interface IRemoveCartItem {
+  comicId: string;
+}
+
+export interface ICartItem {
   comicId: string;
   quantity: number;
   price: number;
@@ -8,7 +12,7 @@ interface ICartItem {
 }
 
 export interface ICart {
-  _id: string;
-  userId: string;
+  userId?: string;
   items: ICartItem[];
+  totalPrice: number;
 }

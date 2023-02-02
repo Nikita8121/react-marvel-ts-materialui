@@ -13,8 +13,10 @@ const useGetUser = () => {
       }
       return null;
     },
-    onSuccess: () => {
-      setIsLoggedIn(true);
+    onSuccess: (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+      }
     },
     onError: () => {
       clearAuthToken();

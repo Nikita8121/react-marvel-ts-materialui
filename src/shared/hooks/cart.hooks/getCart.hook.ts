@@ -1,17 +1,34 @@
 import { useQuery } from "react-query";
 import { getCart } from "../../services/apiService/cartApiService/cart.api.service";
-import { getAuthToken } from "../../utils/authTokenUtils";
+import useUserStore from "../../../store/userStore";
+import useCartStore from "../../../store/cartStore";
+
+import { getCartFromStorage } from "../../utils/cartUtils";
 
 const useGetCart = () => {
-  return useQuery({
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const cart = useCartStore((state) => state.cart);
+  const isCartOpen = useCartStore((state) => state.isCartOpen);
+  const toggleCart = useCartStore((state) => state.toggleCart);
+  const initCart = useCartStore((state) => state.initCart);
+  const { refetch } = useQuery({
     queryKey: ["cart"],
     queryFn: async () => {
-      if (getAuthToken()) {
+      if (isLoggedIn) {
         return getCart();
       }
-      return null;
+      return getCartFromStorage();
+    },
+    enabled: false,
+    retry: 0,
+    onSuccess: (fetchedCart) => {
+      if (fetchedCart) {
+        initCart(fetchedCart);
+      }
     },
   });
+
+  return { cart, fetchCart: refetch, isCartOpen, toggleCart };
 };
 
 export default useGetCart;

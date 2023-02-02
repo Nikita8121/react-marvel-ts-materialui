@@ -2,14 +2,14 @@ import { useSnackbar } from "notistack";
 import { useComicsQuery } from "../../shared/hooks/comic.api.hook";
 import { IComic } from "../../shared/services/apiService/comicApiService/comic.api.service.types";
 import transformApiResponse from "../../shared/utils/apiUtils";
-import useCartStore from "../../store/cartStore";
+import useAddItem from "../../shared/hooks/cart.hooks/addItem.hook";
 
 const useComicList = () => {
   const { data, fetchNextPage, isFetchingNextPage, isFetching } =
     useComicsQuery(0);
 
   const { enqueueSnackbar } = useSnackbar();
-  const addItem = useCartStore((state) => state.addItem);
+  const { addItem } = useAddItem();
 
   const addToCart = (item: IComic): void => {
     addItem(item);
@@ -17,7 +17,7 @@ const useComicList = () => {
       variant: "success",
       anchorOrigin: {
         horizontal: "right",
-        vertical: "bottom",
+        vertical: "top",
       },
     });
   };

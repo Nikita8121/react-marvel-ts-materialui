@@ -11,6 +11,7 @@ import LoginPage from "../../pages/loginPage/LoginPage";
 import ProfilePage from "../../pages/profilePage/ProfilePage";
 import CartLink from "../cartLink/CartLink";
 import Cart from "../cart/Cart";
+import OrderPage from "../../pages/orderPage/OrderPage";
 
 const App = () => {
   const { isLoading } = useApp();
@@ -28,11 +29,12 @@ const App = () => {
               <Route path="/comics/:id" element={<SingleComicPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/order" element={<OrderPage />} />
             </Route>
           </Routes>
+          <Cart />
+          <CartLink />
         </Router>
-        <Cart />
-        <CartLink />
       </ThemeProvider>
     </SnackbarProvider>
   );

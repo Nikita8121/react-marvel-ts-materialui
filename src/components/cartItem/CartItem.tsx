@@ -1,8 +1,16 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import "./CartItem.scss";
+import { ICartItem } from "../../shared/services/apiService/cartApiService/cart.api.service.types";
+import { IComic } from "../../shared/services/apiService/comicApiService/comic.api.service.types";
 
-const CartItem = () => {
+interface ICartItemProps {
+  item: ICartItem;
+  removeFromCart: (itemId: string) => void;
+  addItemToCart: (item: IComic) => void;
+}
+
+const CartItem = ({ item, removeFromCart, addItemToCart }: ICartItemProps) => {
   return (
     <Box
       sx={{
@@ -13,10 +21,10 @@ const CartItem = () => {
       }}
     >
       <Box sx={{ flex: "1" }}>
-        <h3>title</h3>
+        <h3>{item.item.title}</h3>
         <div className="information">
-          <p>Price: $</p>
-          <p>Total: $</p>
+          <p>Price: {item.price} $</p>
+          <p>Total: {item.price * item.quantity} $</p>
         </div>
         <Box
           sx={{ display: "flex", justifyContent: "space-between" }}
@@ -26,26 +34,22 @@ const CartItem = () => {
             size="small"
             disableElevation
             variant="contained"
-            /* onClick={() => removeFromCart(item.id)} */
+            onClick={() => removeFromCart(item.comicId)}
           >
             -
           </Button>
-          <p>amount</p>
+          <p>amount: {item.quantity}</p>
           <Button
             size="small"
             disableElevation
             variant="contained"
-            /* onClick={() => addToCart(item)} */
+            onClick={() => addItemToCart(item.item)}
           >
             +
           </Button>
         </Box>
       </Box>
-      <img
-        className="cart-item__img"
-        src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-        alt="fav"
-      />
+      <img className="cart-item__img" src={item.item.thumbnail} alt="fav" />
     </Box>
   );
 };
